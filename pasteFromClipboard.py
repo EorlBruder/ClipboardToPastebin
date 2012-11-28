@@ -2,6 +2,7 @@ import os
 import sys
 import urllib.parse
 import urllib.request
+import smoid
 
 class PastebinAPI(object):
     _api_url = "http://pastebin.com/api/api_post.php"
@@ -20,6 +21,11 @@ class PastebinAPI(object):
         argv['api_option'] = str("paste")
         #Setting the Expire Time to 10 Minutes
         argv['paste_expire_date'] = "10M"
+        #Setting Syntax Coloring
+        a = smoid.GrandChecker()
+        a.__init__()
+        lang = a.find_out_language(api_paste_code)
+        argv['api_paste_format'] = lang
         #give the list we just created to the pastebin api
         request_string = urllib.request.urlopen(self._api_url,bytes(urllib.parse.urlencode(argv),"utf-8"))
         response = request_string.read()
