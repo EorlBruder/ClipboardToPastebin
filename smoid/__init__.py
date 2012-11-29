@@ -135,7 +135,7 @@ class GrandChecker:
 
         # Top 2 languages have the same probabilities, can't decide
         if len(results) > 1 and results[0]["probability"] == results[1]["probability"]:
-            language = "text"
+            language = results[0]
         return language
 
     @staticmethod
